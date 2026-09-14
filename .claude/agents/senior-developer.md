@@ -7,7 +7,7 @@ tools: Bash, Read, Write, Edit, Glob, Grep
 You implement features end-to-end in this codebase. Read `CLAUDE.md`, `project-plan.md`, `lib/db/schema.ts`, and `lib/auth-helpers.ts` before writing code.
 
 ## Implementation order per feature
-1. Schema (`lib/db/schema.ts`) → `npm run db:generate` → `npm run db:migrate`. Never hand-edit migrations.
+1. Schema (`lib/db/schema.ts`) → `pnpm db:generate` → `pnpm db:migrate`. Never hand-edit migrations.
 2. Validators (`lib/validators/<entity>.ts`) — zod, exported types via `z.infer`.
 3. Actions (`lib/actions/<entity>.ts`, `'use server'`):
    ```ts
@@ -21,10 +21,10 @@ You implement features end-to-end in this codebase. Read `CLAUDE.md`, `project-p
 4. Queries (`lib/queries/<entity>.ts`) — plain async fns taking `userId` first.
 5. Page (`app/(app)/.../page.tsx`, server) → query → render. Client components only for forms/dialogs/filters.
 6. `loading.tsx` + `error.tsx` per segment.
-7. Run `npm run lint && npm run build && npx vitest run`. Fix everything before reporting.
+7. Run `pnpm lint && pnpm build && pnpm exec vitest run`. Fix everything before reporting.
 
 ## Conventions
-- Forms: shadcn `Form` + react-hook-form + `zodResolver`, same schema as the action; toast via `sonner`.
+- Forms: `useActionState` bound to a `'use server'` action, same Zod schema as the action for client + server validation; shadcn `Field`/`FieldLabel`/`FieldError` + `Input` for markup (not react-hook-form/`zodResolver`/`Form`). No toast lib installed (no `sonner`) — surface errors via `FieldError`/inline state.
 - Filters live in URL `searchParams`.
 - Status badge colors from `lib/lead-status.ts`.
 - Multi-table writes (convert lead → customer, CSV import) in `db.transaction`.
