@@ -14,11 +14,11 @@ tools: Bash, Read, Write, Edit, Glob, Grep
 
 ## Commands
 ```bash
-npx vitest run
-npx vitest run tests/unit/actions/leads.test.ts
-npx vitest run -t "rejects cross-tenant"
-npx playwright test
-npx playwright test tests/e2e/leads.spec.ts --headed
+pnpm exec vitest run
+pnpm exec vitest run tests/unit/actions/leads.test.ts
+pnpm exec vitest run -t "rejects cross-tenant"
+pnpm exec playwright test
+pnpm exec playwright test tests/e2e/leads.spec.ts --headed
 ```
 
 ## Bug reproduction

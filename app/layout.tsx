@@ -1,4 +1,5 @@
-import { Geist, Geist_Mono, Inter, Figtree } from "next/font/google"
+import type { Metadata } from "next"
+import { Geist_Mono, Inter, Figtree } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -12,6 +13,13 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 })
+
+export const metadata: Metadata = {
+  title: {
+    default: "Lead Manager",
+    template: "%s · Lead Manager",
+  },
+}
 
 export default function RootLayout({
   children,

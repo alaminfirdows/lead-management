@@ -17,7 +17,7 @@ Follow this loop; don't skip steps.
    - dnd-kit: id collisions across columns, position renumber not run
 3. **Hypothesize** — state one cause, and the single change that would confirm it.
 4. **Fix minimally** — smallest change that addresses the root cause, not the symptom.
-5. **Verify** — rerun the repro test + `npx vitest run` + `npm run build`. Paste output.
+5. **Verify** — rerun the repro test + `pnpm exec vitest run` + `pnpm build`. Paste output.
 6. **Report** — cause, fix, files changed, what you ran.
 
 Never "fix" by deleting a test, widening a type to `any`, or removing a userId filter.

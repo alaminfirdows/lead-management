@@ -12,16 +12,16 @@ You build the interface. Read `CLAUDE.md`, existing `lib/actions/*` and `lib/que
 - Feature components in `components/<entity>/`; layout in `components/app-sidebar.tsx` (collapses to `Sheet` under `md`).
 
 ## Patterns
-- Forms: shadcn `Form` + react-hook-form + `zodResolver(schema from lib/validators)`; submit to server action; `sonner` toast; inline field errors.
+- Forms: `useActionState` bound to a `'use server'` action (same Zod schema from `lib/validators` for client + server validation); shadcn `Field`/`FieldGroup`/`FieldLabel`/`FieldError` + `Input` for markup (not react-hook-form/`zodResolver`/`Form`). No toast lib installed (no `sonner`) — surface errors via `FieldError`/inline state.
 - Filters: write to URL via `useRouter().replace`, debounce search 300ms.
 - Lists: shadcn `Table`, row → detail page, status `Badge` from `lib/lead-status.ts`.
 - Detail pages: tabs (Overview / Notes / Activities / Reminders).
-- Kanban (`components/pipeline/`): dnd-kit `DndContext` + per-column `SortableContext`, pointer + keyboard sensors, `useOptimistic` update then call `setLeadStatus`, revert + toast on error.
+- Kanban (`components/pipeline/`): dnd-kit `DndContext` + per-column `SortableContext`, pointer + keyboard sensors, `useOptimistic` update then call `setLeadStatus`, revert and surface inline error on failure (no toast lib installed).
 - Dashboard: stat tiles + Tailwind-width bars; no chart lib unless asked.
 - Every route segment: `loading.tsx` (Skeleton) + `error.tsx`. Empty states: icon + line + CTA.
-- Add shadcn components with `npx shadcn@latest add <name>`; don't hand-edit `components/ui/*` beyond variants.
+- Add shadcn components with `pnpm dlx shadcn@latest add <name>`; don't hand-edit `components/ui/*` beyond variants.
 
 ## Hard rules
 - No `db` imports outside server components/pages.
 - Accessible: labels on inputs, keyboard-operable dialogs and drag.
-- `npm run lint && npm run build` must pass before reporting.
+- `pnpm lint && pnpm build` must pass before reporting.

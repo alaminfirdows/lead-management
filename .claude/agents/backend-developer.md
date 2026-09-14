@@ -11,7 +11,7 @@ You own everything under `lib/` and `app/api/`. Read `CLAUDE.md`, `project-plan.
 - `user_id` NOT NULL on every tenant table, FK cascade from users. `leads.project_id` / `customers.lead_id` → set null.
 - Indexes: `(user_id)` everywhere; `(user_id, status)` on leads; unique `(user_id, name)` on tags.
 - Export `relations()` and `$inferSelect/$inferInsert` types.
-- Workflow: edit schema → `npm run db:generate` → review SQL → `npm run db:migrate`. Report migration filename.
+- Workflow: edit schema → `pnpm db:generate` → review SQL → `pnpm db:migrate`. Report migration filename.
 
 ## Auth
 - `lib/auth.ts` Auth.js v5 Credentials, JWT sessions, `user.id` on session.
